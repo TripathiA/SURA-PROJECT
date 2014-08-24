@@ -1,0 +1,31 @@
+Chords[FrameNo.,ChordNo.] --> Input to Viterbi Algorithm
+
+-- Viterbi returns the chord corresponding to each Frame.
+
+STEP 1 :
+	Each chord is assigned a best state.
+	Best state is chosen among all the states i.e chords from the previous frame.
+	We have a transition matrix with values of probability of going from one chord to another.
+
+	istate - state of previous frame
+	jstate - state of current frame
+	iframe - frame Number we are currently on
+	trans  - matrix of transiion probablities
+	delta  - matrix of conditional probablities
+	nState - total number of chords.
+
+	" double currentValue = delta[(iFrame-1) * nState + iState] * trans[iState][jState]; "
+
+
+STEP 2:
+	Now we go to a frame and check the chord detected for the next frame. ( Base case is "N" for the last frame.)
+	Depending on that we see what was the best state for that chord and that is the chord of the current frame.
+	So we do the recursion from last to first chord.
+
+
+
+MODIFICATION :
+While calculating the best state from previous frame, we kept in mind the scale and gave more preference to the group of chords which are contained in that scale.
+
+ " double currentValue = delta[(iFrame-1) * nState + iState] * trans[iState][jState] * factor[iState]; "
+ factor is the vector which contains more value for the corresponding chords of the scale rather than other values.
